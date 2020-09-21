@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: minikube-test
+  labels:
+    app: minikube-test
+spec:
+  containers:
+  - name: minikube-test
+    image: localhost:5000/busybox
+    command: ["sh", "-c", "busybox httpd -f -p 8000"]
+    ports:
+      - containerPort: 8000
