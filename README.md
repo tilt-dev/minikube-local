@@ -11,25 +11,27 @@ This repo documents the best way to set it up.
 
 ## Why use Minikube with a local registry?
 
-When developing locally, you want to push images to the cluster as fast as possible.
+Minikube offers many different ways to get your app into the cluster.
 
-Pushing to a local image registry skips a lot of overhead:
+Using a local registry is the best method for iterative app development.
 
-- Unlike with a remote registry, the image stays local to your machine, with no network traffic
+- Unlike with a remote registry, the image stays local to your machine, with no
+  network traffic to wait on or credentials to setup.
 
-- Unlike with loading into the container runtime, docker will skip pushing any layers that already exist in the registry
+- Unlike with an in-cluster builder, you can reset the cluster without deleting
+  the image cache.
 
-- Unlike with in-cluster build daemons, there's no additional auth configuration in-cluster.
+- Unlike with loading into the container runtime, docker will skip pushing any
+  layers that already exist in the registry.
 
-- Unlike with an in-cluster registry, you can reset the cluster without deleting the image cache.
-
-This makes it a great solution for iterative local development. But setting it up is awkward and fiddly. This script makes it easy.
+This makes it a great solution for iterative local development. But setting it
+up is awkward and fiddly. This script makes it easy.
 
 ## How to Try It
 
 1) Install [Minikube](https://minikube.sigs.k8s.io/docs/)
 
-2) Copy the [minikube-with-registry.sh](minikube-with-registry.sh) somewhere on your path.
+2) Copy the [minikube-with-registry.sh](minikube-with-registry.sh) script somewhere on your path.
 
 3) Create a cluster with `minikube-with-registry.sh`. Currently it creates the registry at port 5000.
 
@@ -47,12 +49,6 @@ docker push localhost:5000/alpine
 You can now use the image name `localhost:5000/alpine` in any resources you deploy to the cluster.
 
 [Tilt](https://tilt.dev) will automatically detect the local registry created by this script.
-
-## How to Use it in CI
-
-We also have instructions for setting Minikube up with a local registry in
-
-- [.circleci](.circleci) 
 
 ## Thanks to
 

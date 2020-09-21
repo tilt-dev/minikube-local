@@ -1,0 +1,15 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: tiltdev/circleci-minikube:v1.13.1
+
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run: |
+          set -ex
+          export DOCKER_ADDR=$(echo $DOCKER_HOST | sed -s 's,tcp://,,')
+          apt install -y socat
+          socat UNIX-LISTEN:/var/run/docker.sock,user=root,reuseaddr,fork "TCP:$DOCKER_ADDR" &
+          with-minikube-cluster.sh test/test.sh
