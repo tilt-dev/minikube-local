@@ -1,0 +1,23 @@
+version: 2.1
+
+orbs:
+  kubernetes: circleci/kubernetes@0.11.1
+  
+jobs:
+  build:
+    machine:
+      image: ubuntu-1604:201903-01
+
+    steps:
+      - checkout
+      - kubernetes/install-kubectl
+      - run: |
+          set -ex
+          export MINIKUBE_VERSION=v1.13.1
+          curl -fLo ./minikube-linux-amd64 "https://github.com/kubernetes/minikube/releases/download/${MINIKUBE_VERSION}/minikube-linux-amd64"
+          chmod +x ./minikube-linux-amd64
+          sudo mv ./minikube-linux-amd64 /usr/local/bin/minikube
+      - run: |
+          set -ex
+          ./minikube-with-registry.sh
+          test/test.sh
