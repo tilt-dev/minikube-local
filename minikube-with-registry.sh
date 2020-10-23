@@ -41,7 +41,7 @@ minikube start -p "$MINIKUBE_PROFILE_NAME" --driver=docker --container-runtime=c
 
 # patch the container runtime
 # this is the most annoying sed expression i've ever had to write
-minikube ssh sudo sed "\-i" "s,\\\[plugins.cri.registry.mirrors\\\],[plugins.cri.registry.mirrors]\\\n\ \ \ \ \ \ \ \ [plugins.cri.registry.mirrors.\\\"localhost:${reg_port}\\\"]\\\n\ \ \ \ \ \ \ \ \ \ endpoint\ =\ [\\\"http://${reg_host}:${reg_port}\\\"]," /etc/containerd/config.toml
+minikube ssh sudo sed "\-i" "s,\\\[plugins.cri.registry.mirrors\\\],[plugins.cri.registry.mirrors]\\\n\ \ \ \ \ \ \ \ [plugins.cri.registry.mirrors.\\\"localhost:${reg_port}\\\"]\\\n\ \ \ \ \ \ \ \ \ \ endpoint\ =\ [\\\"http://${reg_host}:5000\\\"]," /etc/containerd/config.toml
 
 # restart the container runtime
 minikube ssh sudo systemctl restart containerd
