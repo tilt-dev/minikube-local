@@ -9,6 +9,12 @@ we recommend using a local registry for faster image pushing and pulling.
 
 This repo documents the best way to set it up.
 
+## UPDATE
+
+For a more comprehensive tool for messing around with local clusters and registries, check out [ctlptl](http://github.com/tilt-dev/ctlptl).
+
+`ctlptl` uses many of the techniques in this shell script.
+
 ## Why use Minikube with a local registry?
 
 Minikube offers many different ways to get your app into the cluster.
