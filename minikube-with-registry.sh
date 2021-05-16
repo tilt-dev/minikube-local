@@ -40,8 +40,7 @@ echo "Registry Host: ${reg_host}"
 minikube start -p "$MINIKUBE_PROFILE_NAME" --driver=docker --container-runtime=containerd
 
 # patch the container runtime
-# this is the most annoying sed expression i've ever had to write
-minikube ssh sudo sed "\-i" "s,\\\[plugins.cri.registry.mirrors\\\],[plugins.cri.registry.mirrors]\\\n\ \ \ \ \ \ \ \ [plugins.cri.registry.mirrors.\\\"localhost:${reg_port}\\\"]\\\n\ \ \ \ \ \ \ \ \ \ endpoint\ =\ [\\\"http://${reg_host}:5000\\\"]," /etc/containerd/config.toml
+minikube ssh cat /etc/containerd/config.toml | tomlq '.plugins.cri.registry.mirrors."localhost:5000" = {endpoint: ["http://localhost:5000"]}' -t | tee ~/.minikube/files/etc/containerd/config.toml
 
 # restart the container runtime
 minikube ssh sudo systemctl restart containerd
