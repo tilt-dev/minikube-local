@@ -19,5 +19,6 @@ jobs:
           sudo mv ./minikube-linux-amd64 /usr/local/bin/minikube
       - run: |
           set -ex
+          python3 -m pip install tomlq
           ./minikube-with-registry.sh
           test/test.sh
