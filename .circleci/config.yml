@@ -17,8 +17,10 @@ jobs:
           curl -fLo ./minikube-linux-amd64 "https://github.com/kubernetes/minikube/releases/download/${MINIKUBE_VERSION}/minikube-linux-amd64"
           chmod +x ./minikube-linux-amd64
           sudo mv ./minikube-linux-amd64 /usr/local/bin/minikube
+
+          pyenv global 3.6.5
+          python3 -m pip install tomlq
       - run: |
           set -ex
-          python3 -m pip install tomlq
           ./minikube-with-registry.sh
           test/test.sh
