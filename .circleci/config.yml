@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   kubernetes: circleci/kubernetes@0.11.1
-  
+
 jobs:
   build:
     machine:
@@ -17,6 +17,8 @@ jobs:
           curl -fLo ./minikube-linux-amd64 "https://github.com/kubernetes/minikube/releases/download/${MINIKUBE_VERSION}/minikube-linux-amd64"
           chmod +x ./minikube-linux-amd64
           sudo mv ./minikube-linux-amd64 /usr/local/bin/minikube
+
+          sudo apt-get install -y jq
       - run: |
           set -ex
           pyenv global 3.6.5
