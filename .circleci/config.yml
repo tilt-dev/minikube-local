@@ -25,6 +25,6 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install tomlq
           python3 -m pip show tomlq
-          which python3 | basename | xargs ls -l
+          which python3 | xargs basename | xargs ls -l
           ./minikube-with-registry.sh
           test/test.sh
