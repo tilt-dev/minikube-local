@@ -41,8 +41,8 @@ minikube start -p "$MINIKUBE_PROFILE_NAME" --driver=docker --container-runtime=c
 
 # patch the container runtime
 minikube ssh cat /etc/containerd/config.toml | \
-	tomlq '.plugins.cri.registry.mirrors."localhost:5000" = {endpoint: ["http://localhost:5000"]}' -t | \
-	ssh -i `minikube ssh-key` docker@`minikube ip` sudo tee /etc/containerd/config.toml
+	tomlq ".plugins.cri.registry.mirrors.\"localhost:5000\" = {endpoint: [\"http://${reg_host}:5000\"]}" -t | \
+	ssh -o StrictHostKeyChecking=no -i `minikube ssh-key` docker@`minikube ip` sudo tee /etc/containerd/config.toml
 
 # restart the container runtime
 minikube ssh sudo systemctl restart containerd
