@@ -21,5 +21,7 @@ jobs:
           set -ex
           pyenv global 3.6.5
           python3 -m pip install tomlq
+          env | grep PATH
+          find /usr -name tomlq
           ./minikube-with-registry.sh
           test/test.sh
