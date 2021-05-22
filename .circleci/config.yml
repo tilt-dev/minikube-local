@@ -13,7 +13,7 @@ jobs:
       - kubernetes/install-kubectl
       - run: |
           set -ex
-          export MINIKUBE_VERSION=v1.13.1
+          export MINIKUBE_VERSION=v1.20.0
           curl -fLo ./minikube-linux-amd64 "https://github.com/kubernetes/minikube/releases/download/${MINIKUBE_VERSION}/minikube-linux-amd64"
           chmod +x ./minikube-linux-amd64
           sudo mv ./minikube-linux-amd64 /usr/local/bin/minikube
