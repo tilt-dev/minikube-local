@@ -1,5 +1,16 @@
 # minikube-local
 
+## UPDATE(2023-04-03)
+
+As of Minikube 1.26, this script no longer works, due to [upstream breaking API changes](https://github.com/tilt-dev/ctlptl/issues/239).
+
+Please migrate to [ctlptl](http://github.com/tilt-dev/ctlptl), which checks
+the version of Minikube and uses the right config.
+
+This repo will be archived for posterity.
+
+---
+
 The best way to set minikube up for local development
 
 [![Build Status](https://circleci.com/gh/tilt-dev/minikube-local/tree/master.svg?style=shield)](https://circleci.com/gh/tilt-dev/minikube-local)
@@ -8,12 +19,6 @@ When using Tilt with a [Minikube](https://minikube.sigs.k8s.io/docs/) cluster,
 we recommend using a local registry for faster image pushing and pulling.
 
 This repo documents the best way to set it up.
-
-## UPDATE
-
-For a more comprehensive tool for messing around with local clusters and registries, check out [ctlptl](http://github.com/tilt-dev/ctlptl).
-
-`ctlptl` uses many of the techniques in this shell script.
 
 ## Why use Minikube with a local registry?
 
